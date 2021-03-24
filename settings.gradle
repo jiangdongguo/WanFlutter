@@ -1,0 +1,31 @@
+rootProject.name='WanFlutter'
+include ':app'
+
+// 支持flutter和native混编
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir,
+        '../flutter_module/.android/include_flutter.groovy'
+))
+
+// flutter模块
+include ':flutter_module'
+
+// 基础library
+include ':common'
+
+// 业务module
+include ':user'
+include ':push'
+include ':share'
+include ':camera'
+include ':myflutter' // 与flutter交互原生部分模块
+
+project(':flutter_module').projectDir = new File('../flutter_module')
+project(':common').projectDir = new File("base/common")
+project(':user').projectDir = new File("biz/user")
+project(':push').projectDir = new File("biz/push")
+project(':share').projectDir = new File("biz/share")
+project(':camera').projectDir = new File("biz/camera")
+project(':myflutter').projectDir = new File("biz/myflutter")
+
